@@ -4,16 +4,13 @@
 </div>
 
 # Gallery
-<img title="Desktop" alt="Desktop" src="./assets/2023-04-26T01:58:03.png">
+[2023-05-15T02:30:37](https://github.com/samiulbasirfahim/Flakes/assets/122826532/5da992dd-a6f7-406a-8134-29bb1f5376bf)
 <br/>
 <br/>
-<img title="Terminal" alt="Terminal" src="./assets/2023-04-26T01:59:07.png">
+![image](https://github.com/samiulbasirfahim/Flakes/assets/122826532/d1b2eeb3-c9d8-458d-8417-dee237d08796)
 <br/>
-<br/>
-<img title="nvim" alt="nvim" src="./assets/2023-04-26T01:59:41.png">
-<br/>
-<br/>
-<br/>
+<br/>!
+
 
 ## Technology
 
