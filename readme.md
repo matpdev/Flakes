@@ -18,7 +18,7 @@
 - Window Manager: Hyprland
 - Compositor: Wayland
 - Display Manager: None (Use tty for login)
-- Terminal: Kitty
+- Terminal: Foot
 - ColorScheme: catppuccino
 - Editor: Neovim (neovide), Visual Studio code
 - Topbar: Waybar (dexperimental override)
