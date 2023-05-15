@@ -1,10 +1,14 @@
-{ lib, stdenv, fetchzip, ... }:
+{
+  lib,
+  stdenv,
+  fetchzip,
+  ...
+}:
 stdenv.mkDerivation rec {
   pname = "cattpuccin-cursors";
   version = "9999";
   src = fetchzip {
-    url =
-      "https://github.com/Ruixi-rebirth/Catppuccin-cursor/archive/refs/tags/1.0.zip";
+    url = "https://github.com/Ruixi-rebirth/Catppuccin-cursor/archive/refs/tags/1.0.zip";
     sha256 = "sha256-RCEVxeo3oBNqHogxWM/YqfPoQotirSQTMw15zCahWto=";
   };
   installPhase = ''
@@ -16,6 +20,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/Ruixi-rebirth/Catppuccin-cursor";
     license = lib.licenses.gpl3;
     platforms = lib.platforms.unix;
-    maintainers = [ lib.maintainers.Ruixi-rebirth ];
+    maintainers = [lib.maintainers.Ruixi-rebirth];
   };
 }

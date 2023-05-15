@@ -1,10 +1,10 @@
-{ stdenv
-, lib
-, fetchFromGitHub
-, rustPlatform
-, pkg-config
-, libxkbcommon
-,
+{
+  stdenv,
+  lib,
+  fetchFromGitHub,
+  rustPlatform,
+  pkg-config,
+  libxkbcommon,
 }:
 rustPlatform.buildRustPackage rec {
   pname = "swww";
@@ -19,9 +19,9 @@ rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-7HYSuwVlAv61u346PmsTnUipDc+HDFySMYgeQCAsBLg=";
 
-  nativeBuildInputs = [ pkg-config ];
+  nativeBuildInputs = [pkg-config];
 
-  buildInputs = [ libxkbcommon ];
+  buildInputs = [libxkbcommon];
 
   doCheck = false;
 
@@ -29,6 +29,6 @@ rustPlatform.buildRustPackage rec {
     description = "A Solution to your Wayland Wallpaper Woes. ";
     homepage = "https://github.com/Horus645/${pname}";
     license = licenses.gpl3Only;
-    platforms = [ "x86_64-linux" ];
+    platforms = ["x86_64-linux"];
   };
 }

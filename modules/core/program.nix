@@ -1,7 +1,4 @@
-{ pkgs, ... }:
-
-{
-
+{pkgs, ...}: {
   programs.dconf.enable = true;
   programs.nm-applet.enable = true;
   programs.seahorse.enable = true;

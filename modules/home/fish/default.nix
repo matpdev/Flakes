@@ -1,4 +1,9 @@
-{ hostname, config, pkgs, ... }: {
+{
+  hostname,
+  config,
+  pkgs,
+  ...
+}: {
   programs.fish = {
     loginShellInit = ''
       set TTY1 (tty)

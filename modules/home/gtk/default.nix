@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-let 
+{pkgs, ...}: let
   matrix-gtk = pkgs.fetchFromGitHub {
     owner = "samiulbasirfahim";
     repo = "Matrix-gtk";
@@ -14,7 +12,7 @@ in {
     pkgs.noto-fonts
     pkgs.noto-fonts-cjk
     pkgs.noto-fonts-emoji
-    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (pkgs.nerdfonts.override {fonts = ["FiraCode"];})
   ];
   xdg.dataFile."themes/matrix-gtk".source = matrix-gtk;
   gtk = {
