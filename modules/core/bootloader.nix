@@ -4,6 +4,7 @@
     cleanTmpDir = true;
     # kernelPackages = pkgs.linuxPackages_zen;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    initrd.kernelModules = [ "amdgpu" ];
     plymouth = {
       enable = false;
     };

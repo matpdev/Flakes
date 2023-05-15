@@ -1,4 +1,6 @@
-* {  font-family: FiraCode Nerd Font;  }
+* {
+ font-family: FiraCode Nerd Font;  
+}
 window {
   margin: 0px;
   border: 2px solid #595959;

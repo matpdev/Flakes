@@ -1,13 +1,13 @@
-{ pkgs, ... }:
-
-
-let
+{pkgs, ...}: let
   wall-change = pkgs.writeShellScriptBin "wall-change" ''
     swww img $1 --transition-type random --transition-pos "$(hyprctl cursorpos)" --transition-duration 3
   '';
   load-env = pkgs.writeShellScriptBin "load-env" ''
     bash ~/.local/bin/env/animation
     bash ~/.local/bin/env/layout
+    bash ~/.local/bin/env/opacity
+    bash ~/.local/bin/env/blur
+    bash ~/.local/bin/env/wallpaper
   '';
   toggle-animation = pkgs.writeShellScriptBin "toggle-animation" ''
     blur_val=$(hyprctl getoption animations:enabled | grep int)
@@ -49,32 +49,29 @@ let
   toggle-opacity = pkgs.writeShellScriptBin "toggle-opacity" ''
     opacity_val=$(hyprctl getoption decoration:active_opacity | grep float)
     echo "$opacity_val"
-    if [[ "$opacity_val" == "	float: 0.900000" ]]; then
+    if [[ "$opacity_val" == "	float: 0.850000" ]]; then
         rm -rf ~/.local/bin/env/opacity
         echo "hyprctl --batch 'keyword decoration:active_opacity 1.0 ; keyword decoration:inactive_opacity 1.0 ; keyword decoration:fullscreen_opacity 1.0'" > ~/.local/bin/env/opacity
         hyprctl --batch "keyword decoration:active_opacity 1.0 ; keyword decoration:inactive_opacity 1.0 ; keyword decoration:fullscreen_opacity 1.0"
     else
         rm -rf ~/.local/bin/env/opacity
-        echo "hyprctl --batch 'keyword decoration:active_opacity 0.90 ; keyword decoration:inactive_opacity 0.84 ; keyword decoration:fullscreen_opacity 1.0'" > ~/.local/bin/env/opacity
-        hyprctl --batch "keyword decoration:active_opacity 0.90 ; keyword decoration:inactive_opacity 0.84 ; keyword decoration:fullscreen_opacity 1.0"
+        echo "hyprctl --batch 'keyword decoration:active_opacity 0.8500 ; keyword decoration:inactive_opacity 0.76 ; keyword decoration:fullscreen_opacity 1.0'" > ~/.local/bin/env/opacity
+        hyprctl --batch "keyword decoration:active_opacity 0.8500 ; keyword decoration:inactive_opacity 0.76 ; keyword decoration:fullscreen_opacity 1.0"
     fi
   '';
   wallpaper-picker = pkgs.writeShellScriptBin "wallpaper-picker" ''
     wallpaper_folder=$HOME/Pictures/wallpapers
-    wallpaper_default=$HOME/.local/share/default_wallpaper
     wallpaper_location="$(ls $wallpaper_folder | wofi -n --show dmenu)"
     if [[ -d $wallpaper_folder/$wallpaper_location ]]; then
         wallpaper_temp="$wallpaper_location"
     elif [[ -f $wallpaper_folder/$wallpaper_location ]]; then
-    	rm -rf $wallpaper_default
-    	cp -r $wallpaper_folder/$wallpaper_temp/$wallpaper_location $wallpaper_default
+      echo "swww img $wallpaper_folder/$wallpaper_temp/$wallpaper_location" > ~/.local/bin/env/wallpaper
     	wall-change $wallpaper_folder/$wallpaper_temp/$wallpaper_location
     else
         exit 1
     fi
   '';
-in
-{
+in {
   home.file.".local/bin/toggle_layout".source = ./toggle_layout;
   home.file.".local/bin/anime".source = ./ani-cli;
   home.packages = with pkgs; [

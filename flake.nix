@@ -6,20 +6,23 @@
     hyprland.url = "github:hyprwm/Hyprland";
     hypr-contrib.url = "github:hyprwm/contrib";
     hyprpicker.url = "github:hyprwm/hyprpicker";
+    alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { nixpkgs, self, ... }@inputs:
-    let
-      selfPkgs = import ./pkgs;
-    in
-    {
-      overlays.default = selfPkgs.overlay;
-      nixosConfigurations = (import ./modules/core/default.nix {
-        inherit self nixpkgs inputs;
-      });
+  outputs = {
+    nixpkgs,
+    self,
+    ...
+  } @ inputs: let
+    selfPkgs = import ./pkgs;
+  in {
+    overlays.default = selfPkgs.overlay;
+    nixosConfigurations = import ./modules/core/default.nix {
+      inherit self nixpkgs inputs;
     };
+  };
 }

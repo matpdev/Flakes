@@ -1,10 +1,12 @@
-{ inputs, pkgs, ... }:
-
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   imports =
-    [ (import ./variables.nix) ] ++
-    [ inputs.hyprland.homeManagerModules.default ];
-  home.packages = with pkgs;[
+    [(import ./variables.nix)]
+    ++ [inputs.hyprland.homeManagerModules.default];
+  home.packages = with pkgs; [
     swww
     inputs.hypr-contrib.packages.${pkgs.system}.grimblast
     hyprpicker
@@ -15,12 +17,13 @@
     grim
     slurp
     wl-clipboard
+    cliphist
     wf-recorder
     glib
     wayland
     direnv
   ];
-  systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
+  systemd.user.targets.hyprland-session.Unit.Wants = ["xdg-desktop-autostart.target"];
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland = {
@@ -34,7 +37,7 @@
       monitor = ,highrr,auto,1
       monitor = ,highres,auto,1
       input {
-        kb_layout = us 
+        kb_layout = us
         follow_mouse = 1
       }
 
@@ -44,24 +47,24 @@
         disable_autoreload = true # autoreload is unnecessary on nixos
       }
 
-      general { 
+      general {
         sensitivity = 1
         gaps_in = 6
         gaps_out= 10
         border_size = 2
-        col.active_border = rgba(595959ff) 
+        col.active_border = rgba(595959ff)
         col.inactive_border = rgba(00140e10)
         apply_sens_to_raw = 1
       }
 
       dwindle {
         no_gaps_when_only = false
-        force_split = 0 
+        force_split = 0
         special_scale_factor = 0.8
-        split_width_multiplier = 1.0 
+        split_width_multiplier = 1.0
         use_active_for_splits = true
-        pseudotile = yes 
-        preserve_split = yes 
+        pseudotile = yes
+        preserve_split = yes
       }
 
       master {
@@ -77,22 +80,30 @@
         active_opacity = 0.8500;
         inactive_opacity = 0.76;
         blur = 1
-        blur_size = 1
-        blur_passes = 1
+        blur_size = 2
+        blur_passes = 2
         drop_shadow = 0
       }
 
 
       animations {
-        enabled = true
-        bezier = smoothIn, 0.25, 1, 0.5, 1
-        bezier = overshot, 0, 0, 0, 0
-        animation = windows, 1, 3, overshot, slide
-        animation = windowsOut, 1, 3, overshot, slide
-        animation = border, 1, 5, overshot
-        animation = fade, 1, 5, overshot
-        animation = fadeDim, 1, 3, overshot
-        animation = workspaces,1, 3,overshot,slide
+        # enabled = true
+        # bezier = smoothIn, 0.25, 1, 0.5, 1
+        # bezier = overshot, 0, 0, 0, 0
+        # animation = windows, 1, 3, overshot, slide
+        # animation = windowsOut, 1, 3, overshot, slide
+        # animation = border, 1, 5, overshot
+        # animation = fade, 1, 5, overshot
+        # animation = fadeDim, 1, 3, overshot
+        # animation = workspaces,1, 3,overshot,slide
+
+        bezier = overshot, 0.13, 0.99, 0.29, 1.1
+        bezier = overshot, 0.13, 0.99, 0.29, 1.1
+        animation = windows, 1, 4, overshot, slide
+        animation = windowsOut, 1, 5, default, popin 80%
+        animation = border, 1, 5, default
+        animation = fade, 1, 8, default
+        animation = workspaces, 1, 6, overshot, slide
       }
 
       # ----------------------------------------------------------------
@@ -104,8 +115,9 @@
       bind = $mainMod, F, fullscreen,
       bind = $mainMod, Space, togglefloating,
       bind = $mainMod, Z, exec, pkill wofi || wofi --show drun
-      bind = $mainMod, X, exec, pkill wlogout || wlogout -b 4 
+      bind = $mainMod, X, exec, pkill wlogout || wlogout -b 4
       bind = $mainMod, C, exec, hyprctl dispatch centerwindow none
+      bind = SUPER, V, exec, cliphist list | wofi -dmenu | cliphist decode | wl-copy
       bind = $mainMod, P, pseudo,
       bind = $mainMod, Y, pin,
       bind = $mainMod, J, togglesplit,
@@ -211,12 +223,12 @@
       exec-once = systemctl --user import-environment &
       exec-once = hash dbus-update-activation-environment 2>/dev/null &
       exec-once = dbus-update-activation-environment --systemd &
-      exec-once = swww init && sleep 0.1 && swww img .local/share/default_wallpaper && sleep 0.1 && swaylock && notify-send "Hey $USER, Welcome back" && sleep 5 && https://www.youtube.com/watch?v=FssqSpIjBn8&list=PLh2EsjwYJx7sIOwroCZbfd-NYkl-Xrv3V&index=1 & 
+      exec-once = swww init && sleep 0.1 && bash load-env && sleep 0.1 && swaylock && notify-send "Hey $USER, Welcome back" && sleep 5 && https://www.youtube.com/watch?v=FssqSpIjBn8&list=PLh2EsjwYJx7sIOwroCZbfd-NYkl-Xrv3V&index=1 &
       exec-once = sleep 1 && waybar &
       exec-once = mako &
       # exec-once = sleep 2 && webcord -m &
-      exec = load-env
+      exec-once = wl-paste --type text --watch cliphist store
+      exec-once = wl-paste --type image --watch cliphist store
     '';
   };
 }
-

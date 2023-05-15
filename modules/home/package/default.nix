@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{inputs, pkgs, ... }:
 
 {
   imports =
@@ -59,6 +59,7 @@
     figlet
     macchina
     cloudflare-warp
+    inputs.alejandra.defaultPackage.${system}
     # lxappearance
     # glib
 
