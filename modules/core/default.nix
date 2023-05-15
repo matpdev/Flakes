@@ -14,7 +14,8 @@ in {
   nixos = nixpkgs.lib.nixosSystem {
     specialArgs = {inherit self inputs;};
     modules =
-      [(import ./bootloader.nix)]
+      [inputs.chaotic.nixosModules.default]
+      ++ [(import ./bootloader.nix)]
       ++ [(import ./hardware.nix)]
       ++ [(import ./network.nix)]
       ++ [(import ./pipewire.nix)]
@@ -26,8 +27,7 @@ in {
       ++ [(import ./user.nix)]
       ++ [(import ./wayland.nix)]
       ++ [(import ./cloudflare-warp.nix)]
-      ++
-      # [ (import ./dwm.nix) ] ++
-      [(import ./../../hosts/nixos/hardware-configuration.nix)];
+      # ++ [(import ./dwm.nix)]
+      ++ [(import ./../../hosts/nixos/hardware-configuration.nix)];
   };
 }
