@@ -7,7 +7,7 @@
     hypr-contrib.url = "github:hyprwm/contrib";
     hyprpicker.url = "github:hyprwm/hyprpicker";
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";    
+    # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -14,8 +14,8 @@ in {
   nixos = nixpkgs.lib.nixosSystem {
     specialArgs = {inherit self inputs;};
     modules =
-      [inputs.chaotic.nixosModules.default]
-      ++ [(import ./bootloader.nix)]
+      # [inputs.chaotic.nixosModules.default]
+      [(import ./bootloader.nix)]
       ++ [(import ./hardware.nix)]
       ++ [(import ./network.nix)]
       ++ [(import ./pipewire.nix)]

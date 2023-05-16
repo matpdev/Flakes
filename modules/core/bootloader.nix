@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   boot = {
     cleanTmpDir = true;
-    # kernelPackages = pkgs.linuxPackages_zen;
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_zen;
+    # kernelPackages = pkgs.linuxPackages_cachyos;
 
     plymouth = {
       enable = false;
