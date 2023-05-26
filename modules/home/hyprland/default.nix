@@ -223,10 +223,9 @@
       exec-once = systemctl --user import-environment &
       exec-once = hash dbus-update-activation-environment 2>/dev/null &
       exec-once = dbus-update-activation-environment --systemd &
-      exec-once = swww init && sleep 0.1 && bash load-env && sleep 0.1 && swaylock && notify-send "Hey $USER, Welcome back" && sleep 5 && https://www.youtube.com/watch?v=FssqSpIjBn8&list=PLh2EsjwYJx7sIOwroCZbfd-NYkl-Xrv3V&index=1 &
-      exec-once = sleep 1 && waybar &
+      exec-once = swww init && sleep 0.1 && bash load-env && sleep 0.1 && swaylock && notify-send "Hey $USER, Welcome back" && waybar &
       exec-once = mako &
-      # exec-once = sleep 2 && webcord -m &
+      exec-once = sleep 2 && webcord -m &
       exec-once = wl-paste --type text --watch cliphist store
       exec-once = wl-paste --type image --watch cliphist store
     '';

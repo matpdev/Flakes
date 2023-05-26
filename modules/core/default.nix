@@ -27,7 +27,7 @@ in {
       ++ [(import ./user.nix)]
       ++ [(import ./wayland.nix)]
       ++ [(import ./cloudflare-warp.nix)]
-      # ++ [(import ./dwm.nix)]
+      # ++ [(import ./xserver.nix)]
       ++ [(import ./../../hosts/nixos/hardware-configuration.nix)];
   };
 }
